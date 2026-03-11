@@ -32,6 +32,11 @@ export function setupNavDragScroll(host: HTMLElement): () => void {
     if (!active) {
       return;
     }
+    if (e.buttons === 0) {
+      // Mouse button was released outside the window; reset state.
+      onMouseUp();
+      return;
+    }
     const dx = e.pageX - startX;
     if (!didDrag && Math.abs(dx) < 5) {
       return;
