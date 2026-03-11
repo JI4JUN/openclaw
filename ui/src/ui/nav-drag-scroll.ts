@@ -41,11 +41,13 @@ export function setupNavDragScroll(host: HTMLElement): () => void {
     if (!didDrag && Math.abs(dx) < 5) {
       return;
     }
-    didDrag = true;
+    if (!didDrag) {
+      didDrag = true;
+      nav!.style.cursor = "grabbing";
+      nav!.style.userSelect = "none";
+    }
     e.preventDefault();
     nav!.scrollLeft = startScrollLeft - dx;
-    nav!.style.cursor = "grabbing";
-    nav!.style.userSelect = "none";
   }
 
   function onMouseUp() {
